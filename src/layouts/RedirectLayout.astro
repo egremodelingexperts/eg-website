@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { siteConfig } from "../config/site";
+import { withBase } from "../utils/paths";
 
 interface Props {
   to: string;
@@ -8,6 +9,7 @@ interface Props {
 
 const { to } = Astro.props;
 const destination = new URL(to, siteConfig.siteUrl);
+const redirectTarget = withBase(to);
 ---
 
 <!doctype html>
@@ -15,7 +17,7 @@ const destination = new URL(to, siteConfig.siteUrl);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content={`0; url=${destination.href}`} />
+    <meta http-equiv="refresh" content={`0; url=${redirectTarget}`} />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href={destination} />
     <title>Page moved | {siteConfig.name}</title>
@@ -23,7 +25,7 @@ const destination = new URL(to, siteConfig.siteUrl);
   <body>
     <main class="redirect-page">
       <p>This page has moved.</p>
-      <a class="button button-primary" href={to}>Continue to the new page</a>
+      <a class="button button-primary" href={redirectTarget}>Continue to the new page</a>
     </main>
   </body>
 </html>

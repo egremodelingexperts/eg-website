@@ -2,13 +2,14 @@
 import { Image } from "astro:assets";
 import logo from "../assets/brand/logo.png";
 import { siteConfig } from "../config/site";
+import { withBase } from "../utils/paths";
 
 const pathname = Astro.url.pathname;
 ---
 
 <header class="site-header">
   <div class="header-inner container">
-    <a class="brand" href="/" aria-label={`${siteConfig.name} home`}>
+    <a class="brand" href={withBase("/")} aria-label={`${siteConfig.name} home`}>
       <Image
         src={logo}
         alt=""
@@ -24,22 +25,32 @@ const pathname = Astro.url.pathname;
     <nav class="desktop-nav" aria-label="Primary navigation">
       {
         siteConfig.navigation.map((item) => (
-          <a class:list={[pathname === item.href && "active"]} href={item.href}>
+          <a class:list={[pathname === withBase(item.href) && "active"]} href={withBase(item.href)}>
             {item.label}
           </a>
         ))
       }
       <span class="nav-divider" aria-hidden="true"></span>
-      <a class="contact-link" href={siteConfig.phoneHref} aria-label={`Call ${siteConfig.phoneDisplay}`}>
+      <a
+        class="contact-link"
+        href={siteConfig.phoneHref}
+        aria-label={`Call ${siteConfig.phoneDisplay}`}
+      >
         Call
       </a>
-      <a class="contact-link" href={`mailto:${siteConfig.email}`} aria-label={`Email ${siteConfig.name}`}>
+      <a
+        class="contact-link"
+        href={`mailto:${siteConfig.email}`}
+        aria-label={`Email ${siteConfig.name}`}
+      >
         Email
       </a>
     </nav>
 
     <div class="desktop-actions">
-      <a class="button button-primary desktop-cta" href="/consultation/"> Request Consultation </a>
+      <a class="button button-primary desktop-cta" href={withBase("/consultation/")}>
+        Request Consultation
+      </a>
     </div>
 
     <button
@@ -55,15 +66,15 @@ const pathname = Astro.url.pathname;
 
   <div class="mobile-menu" id="mobile-menu" hidden>
     <nav aria-label="Mobile navigation">
-      <a href="/">Home</a>
+      <a href={withBase("/")}>Home</a>
       {
         siteConfig.navigation.map((item) => (
-          <a class:list={[pathname === item.href && "active"]} href={item.href}>
+          <a class:list={[pathname === withBase(item.href) && "active"]} href={withBase(item.href)}>
             {item.label}
           </a>
         ))
       }
-      <a class="mobile-cta" href="/consultation/">Request Consultation</a>
+      <a class="mobile-cta" href={withBase("/consultation/")}>Request Consultation</a>
       <div class="mobile-direct" aria-label="Direct contact options">
         <a href={siteConfig.phoneHref}>Call</a>
         <a href={`mailto:${siteConfig.email}`}>Email</a>

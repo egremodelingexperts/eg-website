@@ -87,6 +87,18 @@ Before changing production DNS:
    custom domain to `en.egremodelingexperts.com`, and verify its HTTPS
    certificate before retiring the Wix-hosted `en` endpoint.
 
+The manual **Deploy to GitHub Pages** workflow has two targets:
+
+- `repository-preview` builds for
+  `https://egremodelingexperts.github.io/eg-website/`. Use this before the DNS
+  cutover.
+- `custom-domain` builds for `https://egremodelingexperts.com/`. Run this
+  target immediately before changing DNS and for all normal production
+  deployments after launch.
+
+The selected target changes only the generated base path. Canonical metadata
+continues to identify the apex production domain.
+
 The repository already declares this canonical domain in:
 
 - `astro.config.mjs`

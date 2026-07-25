@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/brand/logo.png";
 import { siteConfig } from "../config/site";
+import { withBase } from "../utils/paths";
 
 interface Props {
   year: number;
@@ -13,7 +14,7 @@ const { year } = Astro.props;
 <footer class="site-footer" id="contact">
   <div class="footer-grid container">
     <div class="footer-brand">
-      <a href="/" aria-label={`${siteConfig.name} home`}>
+      <a href={withBase("/")} aria-label={`${siteConfig.name} home`}>
         <Image src={logo} alt="" width={180} height={180} format="webp" quality={82} />
       </a>
       <p>Crafting beautiful and functional spaces from concept to completion.</p>
@@ -25,19 +26,19 @@ const { year } = Astro.props;
     <div>
       <h2>Explore</h2>
       <ul>
-        <li><a href="/portfolio/">Portfolio</a></li>
-        <li><a href="/reviews/">Reviews</a></li>
-        <li><a href="/consultation/">Consultation</a></li>
-        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href={withBase("/portfolio/")}>Portfolio</a></li>
+        <li><a href={withBase("/reviews/")}>Reviews</a></li>
+        <li><a href={withBase("/consultation/")}>Consultation</a></li>
+        <li><a href={withBase("/privacy/")}>Privacy Policy</a></li>
       </ul>
     </div>
 
     <div>
       <h2>Services</h2>
       <ul>
-        <li><a href="/portfolio/#kitchens">Kitchen Remodeling</a></li>
-        <li><a href="/portfolio/#bathrooms">Bathroom Remodeling</a></li>
-        <li><a href="/portfolio/#surfaces">Surfaces &amp; Custom Details</a></li>
+        <li><a href={withBase("/portfolio/#kitchens")}>Kitchen Remodeling</a></li>
+        <li><a href={withBase("/portfolio/#bathrooms")}>Bathroom Remodeling</a></li>
+        <li><a href={withBase("/portfolio/#surfaces")}>Surfaces &amp; Custom Details</a></li>
       </ul>
     </div>
 
@@ -53,7 +54,7 @@ const { year } = Astro.props;
   </div>
   <div class="footer-bottom container">
     <span>© {year} {siteConfig.legalName}. All rights reserved.</span>
-    <a href="/privacy/">Privacy Policy</a>
+    <a href={withBase("/privacy/")}>Privacy Policy</a>
   </div>
 </footer>
 

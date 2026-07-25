@@ -8,6 +8,7 @@ import { siteConfig } from "../config/site";
 import { testimonials } from "../data/testimonials";
 import { craftingImage, mainBannerImage } from "../data/imageAssets";
 import { bathroomGallery, kitchenGallery, surfacesGallery } from "../data/galleries";
+import { withBase } from "../utils/paths";
 import texasIcon from "../assets/icons/texas.png";
 
 const kitchenService = kitchenGallery.images[0]!;
@@ -52,8 +53,8 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
         Experts.</em
       >
       <div class="hero-actions">
-        <a class="button button-bronze" href="/consultation/">Request Consultation</a>
-        <a class="button button-outline" href="/portfolio/">View Portfolio</a>
+        <a class="button button-bronze" href={withBase("/consultation/")}> Request Consultation </a>
+        <a class="button button-outline" href={withBase("/portfolio/")}>View Portfolio</a>
       </div>
       <div class="hero-direct" aria-label="Direct contact options">
         <span>Prefer direct contact?</span>
@@ -127,7 +128,7 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
         </p>
       </div>
       <div class="service-grid">
-        <a class="service-card" href="/consultation/">
+        <a class="service-card" href={withBase("/consultation/")}>
           <Image
             src={kitchenService.src}
             alt={kitchenService.alt}
@@ -137,7 +138,7 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
           />
           <span>Kitchen Remodeling</span>
         </a>
-        <a class="service-card" href="/consultation/">
+        <a class="service-card" href={withBase("/consultation/")}>
           <Image
             src={bathroomService.src}
             alt={bathroomService.alt}
@@ -147,7 +148,7 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
           />
           <span>Bathroom Remodeling</span>
         </a>
-        <a class="service-card" href="/consultation/">
+        <a class="service-card" href={withBase("/consultation/")}>
           <Image
             src={flooringService.src}
             alt={flooringService.alt}
@@ -230,7 +231,7 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
         </button>
       </div>
       <div class="center-action">
-        <a class="button button-outline" href="/portfolio/">View Full Portfolio</a>
+        <a class="button button-outline" href={withBase("/portfolio/")}> View Full Portfolio </a>
       </div>
     </div>
   </section>
@@ -251,7 +252,7 @@ const tileDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
         }
       </div>
       <div class="center-action">
-        <a class="button button-primary" href="/reviews/">View All Reviews</a>
+        <a class="button button-primary" href={withBase("/reviews/")}>View All Reviews</a>
       </div>
     </div>
   </section>

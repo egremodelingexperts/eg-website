@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../config/site";
+import { withBase } from "../utils/paths";
 
 interface Props {
   title?: string;
@@ -20,7 +21,10 @@ const {
     <h2 class="heading">{title}</h2>
     <p>{body}</p>
     <div class="actions">
-      <a class:list={["button", dark ? "button-bronze" : "button-primary"]} href="/consultation/">
+      <a
+        class:list={["button", dark ? "button-bronze" : "button-primary"]}
+        href={withBase("/consultation/")}
+      >
         Request a Consultation
       </a>
       <a class="button contact-secondary" href={siteConfig.phoneHref}>

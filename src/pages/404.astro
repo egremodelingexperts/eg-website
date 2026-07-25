@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/paths";
 ---
 
 <BaseLayout
@@ -17,8 +18,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         home.
       </p>
       <div class="actions">
-        <a class="button button-primary" href="/">Return Home</a>
-        <a class="button button-outline" href="/portfolio/">View Portfolio</a>
+        <a class="button button-primary" href={withBase("/")}>Return Home</a>
+        <a class="button button-outline" href={withBase("/portfolio/")}>View Portfolio</a>
       </div>
     </div>
   </section>

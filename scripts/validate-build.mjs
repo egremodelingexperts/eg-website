@@ -3,6 +3,8 @@ import path from "node:path";
 
 const root = path.resolve("dist");
 const htmlFiles = [];
+const configuredBase = process.env.DEPLOY_BASE_PATH?.trim() || "/";
+const basePath = configuredBase === "/" ? "/" : `/${configuredBase.replace(/^\/+|\/+$/g, "")}/`;
 
 const visit = (directory) => {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -38,12 +40,17 @@ for (const file of htmlFiles) {
     const cleanPath = href.split("#")[0].split("?")[0];
     if (!cleanPath.startsWith("/")) continue;
 
+    const buildPath =
+      basePath !== "/" && cleanPath.startsWith(basePath)
+        ? `/${cleanPath.slice(basePath.length)}`
+        : cleanPath;
+
     const destination =
-      cleanPath === "/"
+      buildPath === "/"
         ? path.join(root, "index.html")
-        : cleanPath.endsWith("/")
-          ? path.join(root, cleanPath, "index.html")
-          : path.join(root, cleanPath);
+        : buildPath.endsWith("/")
+          ? path.join(root, buildPath, "index.html")
+          : path.join(root, buildPath);
 
     if (!fs.existsSync(destination)) {
       errors.push(
