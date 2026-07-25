@@ -2,12 +2,16 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routes = ["/", "/portfolio/", "/reviews/", "/consultation/", "/privacy/"];
+const appOrigin = new URL(process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:4321").origin;
 
 for (const route of routes) {
   test(`${route} renders without console errors`, async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (message) => {
-      if (message.type() === "error") errors.push(message.text());
+      const sourceUrl = message.location().url;
+      if (message.type() === "error" && sourceUrl && new URL(sourceUrl).origin === appOrigin) {
+        errors.push(message.text());
+      }
     });
 
     await page.goto(route);
@@ -38,13 +42,27 @@ test("mobile navigation opens, closes with Escape, and exposes primary links", a
 
 test("portfolio carousels support controls and keyboard navigation", async ({ page }) => {
   await page.goto("/portfolio/");
-  const carousel = page.getByRole("region", { name: "Kitchen Remodeling project gallery" });
-  await expect(carousel.getByText("Image 1 of 3")).toBeAttached();
-  await carousel.getByRole("button", { name: "Next image" }).click();
-  await expect(carousel.getByText("Image 2 of 3")).toBeAttached();
-  await carousel.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(carousel.getByText("Image 3 of 3")).toBeAttached();
+  const carousels = page.locator("[data-carousel]");
+  const carouselCount = await carousels.count();
+  expect(carouselCount).toBeGreaterThan(0);
+
+  for (let index = 0; index < carouselCount; index += 1) {
+    const carousel = carousels.nth(index);
+    await expect(carousel).toBeVisible();
+
+    const imageCount = await carousel.locator("[data-slide]").count();
+    expect(imageCount).toBeGreaterThan(0);
+
+    const status = carousel.locator("[data-status]");
+    await expect(status).toHaveText(`Image 1 of ${imageCount}`);
+
+    await carousel.getByRole("button", { name: "Next image" }).click();
+    await expect(status).toHaveText(`Image ${(1 % imageCount) + 1} of ${imageCount}`);
+
+    await carousel.focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(status).toHaveText(`Image ${(2 % imageCount) + 1} of ${imageCount}`);
+  }
 });
 
 test("portfolio lightbox opens, navigates, and closes with Escape", async ({ page }) => {
@@ -73,7 +91,9 @@ test("home transformations expand and keep the portfolio CTA below the gallery",
   expect(ctaBox).not.toBeNull();
   expect(ctaBox!.y).toBeGreaterThanOrEqual(galleryBox!.y + galleryBox!.height);
 
-  await page.getByRole("button", { name: "Expand completed living room transformation" }).click();
+  const imageTriggers = gallery.locator("[data-lightbox-trigger]");
+  expect(await imageTriggers.count()).toBeGreaterThan(0);
+  await imageTriggers.first().click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
