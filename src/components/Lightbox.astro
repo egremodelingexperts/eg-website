@@ -25,10 +25,18 @@
   const dialog = document.querySelector<HTMLDialogElement>("[data-lightbox]");
   const image = dialog?.querySelector<HTMLImageElement>("[data-lightbox-image]");
   const caption = dialog?.querySelector<HTMLElement>("[data-lightbox-caption]");
-  const triggers = Array.from(
+  const allTriggers = Array.from(
     document.querySelectorAll<HTMLButtonElement>("[data-lightbox-trigger]"),
   );
+  let triggers: HTMLButtonElement[] = [];
   let currentIndex = 0;
+
+  const triggersFor = (selected: HTMLButtonElement) => {
+    const scope = selected.closest<HTMLElement>("[data-lightbox-scope]");
+    if (!scope) return [selected];
+
+    return Array.from(scope.querySelectorAll<HTMLButtonElement>("[data-lightbox-trigger]"));
+  };
 
   const showImage = (index: number) => {
     if (!dialog || !image || !caption || triggers.length === 0) return;
@@ -41,10 +49,11 @@
     caption.textContent = trigger.dataset.lightboxAlt ?? "";
   };
 
-  triggers.forEach((trigger, index) => {
+  allTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
       if (!dialog) return;
-      showImage(index);
+      triggers = triggersFor(trigger);
+      showImage(triggers.indexOf(trigger));
       dialog.showModal();
     });
   });

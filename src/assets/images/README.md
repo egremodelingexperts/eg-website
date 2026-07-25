@@ -5,7 +5,7 @@ and commit them with the rest of the site.
 
 ## Folder structure
 
-- `main_banner.jpg` — Home page hero image.
+- `home_banner.jpg` — Home page hero image.
 - `crafting_beautiful_and_functional_spaces.png` — Home About image and Consultation hero.
 - `portfolio/kitchen/` — Kitchen portfolio carousel.
 - `portfolio/bathroom/` — Bathroom portfolio carousel.

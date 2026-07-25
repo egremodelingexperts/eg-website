@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../config/site";
-import { craftingImage } from "../../data/imageAssets";
+import { consultationBannerImage } from "../../data/imageAssets";
 
 const hasForm = Boolean(
   siteConfig.consultationForm.embedUrl && siteConfig.consultationForm.publicUrl,
@@ -16,7 +16,7 @@ const hasForm = Boolean(
 >
   <section class="consultation-hero">
     <Image
-      src={craftingImage.src}
+      src={consultationBannerImage.src}
       alt=""
       class="consultation-image"
       widths={[720, 1280, 1920]}

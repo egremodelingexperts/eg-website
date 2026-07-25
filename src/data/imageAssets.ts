@@ -1,6 +1,7 @@
 import type { ImageMetadata } from "astro";
-import mainBannerSource from "../assets/images/main_banner.jpg";
+import mainBannerSource from "../assets/images/home_banner.jpg";
 import craftingSource from "../assets/images/crafting_beautiful_and_functional_spaces.png";
+import consultationBannerSource from "../assets/images/consultation_banner.png";
 
 export interface DiscoveredImage {
   src: ImageMetadata;
@@ -68,7 +69,7 @@ export const mainBannerImage: DiscoveredImage = {
   src: mainBannerSource,
   caption: "Main Banner",
   alt: "Luxury kitchen with custom cabinetry and a granite island",
-  filename: "main_banner.jpg",
+  filename: "home_banner.jpg",
 };
 
 export const craftingImage: DiscoveredImage = {
@@ -76,4 +77,11 @@ export const craftingImage: DiscoveredImage = {
   caption: "Crafting Beautiful and Functional Spaces",
   alt: "Crafting Beautiful and Functional Spaces",
   filename: "crafting_beautiful_and_functional_spaces.png",
+};
+
+export const consultationBannerImage: DiscoveredImage = {
+  src: consultationBannerSource,
+  caption: "Consultation Banner",
+  alt: "Remodeled interior with custom architectural details",
+  filename: "consultation_banner.png",
 };
