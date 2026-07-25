@@ -1,5 +1,7 @@
 EG Remodeling Experts — public DNS snapshot
 Captured: 2026-07-24 America/Chicago
+Reverified live: 2026-07-25 America/Chicago (all recorded A, NS, www
+CNAME, and en CNAME values matched; apex MX and TXT still returned no answer)
 Domain: egremodelingexperts.com
 
 This file records public DNS responses. It does not enumerate private Wix

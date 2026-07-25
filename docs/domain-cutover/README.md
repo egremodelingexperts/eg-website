@@ -6,6 +6,9 @@ Pages site.
 
 Last public-DNS inventory: **July 24, 2026 (America/Chicago)**
 
+Live records reverified without changes: **July 25, 2026
+(America/Chicago)**
+
 ## Safety rule
 
 Keep the Wix website published and keep the Wix subscription active until the
