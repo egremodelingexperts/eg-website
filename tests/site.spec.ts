@@ -71,10 +71,10 @@ test("consultation preview exposes direct contact options while form is pending"
   );
 });
 
-test("legacy routes point visitors to their replacement pages", async ({ page }) => {
-  await page.goto("/blank/");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-    "href",
-    "https://egremodelingexperts.com/reviews/",
+test("legacy routes point visitors to their replacement pages", async ({ request }) => {
+  const response = await request.get("/blank/");
+  expect(response.ok()).toBeTruthy();
+  expect(await response.text()).toContain(
+    '<link rel="canonical" href="https://egremodelingexperts.com/reviews/">',
   );
 });
