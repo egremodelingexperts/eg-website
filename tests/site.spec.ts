@@ -60,14 +60,36 @@ test("portfolio lightbox opens, navigates, and closes with Escape", async ({ pag
   await expect(dialog).toBeHidden();
 });
 
-test("consultation preview exposes direct contact options while form is pending", async ({
+test("home transformations expand and keep the portfolio CTA below the gallery", async ({
   page,
 }) => {
+  await page.goto("/");
+  const gallery = page.locator(".work-grid");
+  const cta = page.getByRole("link", { name: "View Full Portfolio" });
+  const galleryBox = await gallery.boundingBox();
+  const ctaBox = await cta.boundingBox();
+
+  expect(galleryBox).not.toBeNull();
+  expect(ctaBox).not.toBeNull();
+  expect(ctaBox!.y).toBeGreaterThanOrEqual(galleryBox!.y + galleryBox!.height);
+
+  await page.getByRole("button", { name: "Expand completed living room transformation" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
+});
+
+test("consultation embeds the public Google Form with a new-tab fallback", async ({ page }) => {
   await page.goto("/consultation/");
-  await expect(page.locator("[data-form-placeholder]")).toBeVisible();
-  await expect(page.getByRole("link", { name: /Call \(817\) 862-1380/ })).toHaveAttribute(
+  const form = page.locator("[data-consultation-form]");
+  await expect(form).toBeVisible();
+  await expect(form).toHaveAttribute(
+    "src",
+    "https://docs.google.com/forms/d/e/1FAIpQLSeIOdQ7yBXXF4cjz1Uho1y_eYURkfL9d4JOyzwnyCp24Cl_rA/viewform?embedded=true",
+  );
+  await expect(page.getByRole("link", { name: /Open form in a new tab/ })).toHaveAttribute(
     "href",
-    "tel:+18178621380",
+    "https://docs.google.com/forms/d/e/1FAIpQLSeIOdQ7yBXXF4cjz1Uho1y_eYURkfL9d4JOyzwnyCp24Cl_rA/viewform?usp=send_form",
   );
 });
 

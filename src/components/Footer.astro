@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/brand/logo.png";
 import { siteConfig } from "../config/site";
 
 interface Props {
@@ -14,7 +14,7 @@ const { year } = Astro.props;
   <div class="footer-grid container">
     <div class="footer-brand">
       <a href="/" aria-label={`${siteConfig.name} home`}>
-        <Image src={logo} alt="" width={72} height={72} format="webp" quality={82} />
+        <Image src={logo} alt="" width={180} height={180} format="webp" quality={82} />
       </a>
       <p>Crafting beautiful and functional spaces from concept to completion.</p>
       <a class="social-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">
@@ -70,10 +70,20 @@ const { year } = Astro.props;
     gap: clamp(2rem, 5vw, 5rem);
   }
 
+  .footer-brand > a:first-child {
+    display: inline-grid;
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 0.75rem;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: white;
+    padding: 0.25rem;
+  }
+
   .footer-brand img {
-    width: 4.5rem;
-    height: 4.5rem;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 

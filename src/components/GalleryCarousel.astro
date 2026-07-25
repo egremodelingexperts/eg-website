@@ -14,7 +14,7 @@ const { gallery, dark = false } = Astro.props;
   <div class="container">
     <div class="gallery-heading">
       <div>
-        <span class="eyebrow">{gallery.id === "kitchens" ? "01" : "02"}</span>
+        <span class="eyebrow">{gallery.number}</span>
         <h2 class="heading">{gallery.title}</h2>
       </div>
       <p>{gallery.description}</p>
@@ -54,6 +54,7 @@ const { gallery, dark = false } = Astro.props;
                   format="avif"
                   quality={80}
                 />
+                <span class="image-caption">{image.caption}</span>
               </button>
             </div>
           ))
@@ -86,6 +87,7 @@ const { gallery, dark = false } = Astro.props;
       </div>
       <p class="sr-only" data-status>Image 1 of {gallery.images.length}</p>
     </div>
+    {gallery.note && <p class="gallery-note">{gallery.note}</p>}
   </div>
 </section>
 
@@ -145,6 +147,7 @@ const { gallery, dark = false } = Astro.props;
   }
 
   .image-button {
+    position: relative;
     display: block;
     border: 0;
     padding: 0;
@@ -154,6 +157,20 @@ const { gallery, dark = false } = Astro.props;
 
   .image-button :global(img) {
     object-fit: cover;
+  }
+
+  .image-caption {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    max-width: min(32rem, calc(100% - 2.5rem));
+    background: rgba(10, 25, 47, 0.78);
+    color: white;
+    padding: 0.7rem 0.95rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
+    line-height: 1.2;
+    text-align: left;
   }
 
   .carousel-arrow {
@@ -206,6 +223,20 @@ const { gallery, dark = false } = Astro.props;
 
   .dots button[aria-current="true"] {
     background: white;
+  }
+
+  .gallery-note {
+    margin: 3rem auto 0;
+    color: var(--color-slate);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .dark .gallery-note {
+    color: rgba(255, 255, 255, 0.68);
   }
 
   @media (max-width: 700px) {

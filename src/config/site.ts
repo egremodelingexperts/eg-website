@@ -35,8 +35,9 @@ export const siteConfig: SiteConfig = {
     { label: "Reviews", href: "/reviews/" },
   ],
   consultationForm: {
-    // FORM_URL_PENDING: replace both values with the company-owned, login-free Google Form.
-    embedUrl: "",
-    publicUrl: "",
+    embedUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeIOdQ7yBXXF4cjz1Uho1y_eYURkfL9d4JOyzwnyCp24Cl_rA/viewform?embedded=true",
+    publicUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeIOdQ7yBXXF4cjz1Uho1y_eYURkfL9d4JOyzwnyCp24Cl_rA/viewform?usp=send_form",
   },
 };

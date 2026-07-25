@@ -37,6 +37,8 @@ for (const file of trackedFiles) {
     continue;
   }
 
+  if (!fs.existsSync(file)) continue;
+
   const stats = fs.statSync(file);
   if (!stats.isFile() || stats.size > 2_000_000) continue;
 

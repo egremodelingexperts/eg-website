@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/brand/logo.png";
 import { siteConfig } from "../config/site";
 
 const pathname = Astro.url.pathname;
@@ -29,9 +29,18 @@ const pathname = Astro.url.pathname;
           </a>
         ))
       }
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a class="contact-link" href={siteConfig.phoneHref} aria-label={`Call ${siteConfig.phoneDisplay}`}>
+        Call
+      </a>
+      <a class="contact-link" href={`mailto:${siteConfig.email}`} aria-label={`Email ${siteConfig.name}`}>
+        Email
+      </a>
     </nav>
 
-    <a class="button button-primary desktop-cta" href="/consultation/"> Request Consultation </a>
+    <div class="desktop-actions">
+      <a class="button button-primary desktop-cta" href="/consultation/"> Request Consultation </a>
+    </div>
 
     <button
       class="menu-toggle"
@@ -54,7 +63,11 @@ const pathname = Astro.url.pathname;
           </a>
         ))
       }
-      <a href="/consultation/">Request Consultation</a>
+      <a class="mobile-cta" href="/consultation/">Request Consultation</a>
+      <div class="mobile-direct" aria-label="Direct contact options">
+        <a href={siteConfig.phoneHref}>Call</a>
+        <a href={`mailto:${siteConfig.email}`}>Email</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -97,7 +110,7 @@ const pathname = Astro.url.pathname;
     min-height: 5.5rem;
     grid-template-columns: 1fr auto auto;
     align-items: center;
-    gap: 2.25rem;
+    gap: clamp(1rem, 2vw, 2.25rem);
   }
 
   .brand {
@@ -122,7 +135,7 @@ const pathname = Astro.url.pathname;
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 2.25rem;
+    gap: clamp(0.85rem, 1.6vw, 2rem);
   }
 
   .desktop-nav a {
@@ -152,6 +165,21 @@ const pathname = Astro.url.pathname;
     transform: scaleX(1);
   }
 
+  .nav-divider {
+    width: 1px;
+    height: 1.35rem;
+    background: rgba(10, 25, 47, 0.16);
+  }
+
+  .desktop-nav .contact-link {
+    color: var(--color-bronze);
+  }
+
+  .desktop-actions {
+    display: flex;
+    align-items: center;
+  }
+
   .menu-toggle,
   .mobile-menu {
     display: none;
@@ -163,13 +191,18 @@ const pathname = Astro.url.pathname;
       grid-template-columns: 1fr auto;
     }
 
+    .brand-logo {
+      width: 3rem;
+      height: 3rem;
+    }
+
     .brand span {
       max-width: 14rem;
       font-size: 1.05rem;
     }
 
     .desktop-nav,
-    .desktop-cta {
+    .desktop-actions {
       display: none;
     }
 
@@ -218,11 +251,24 @@ const pathname = Astro.url.pathname;
       text-transform: uppercase;
     }
 
-    .mobile-menu a:last-child {
+    .mobile-menu .mobile-cta {
       margin-top: 0.75rem;
       border: 0;
       background: var(--color-navy);
       color: white;
+      text-align: center;
+    }
+
+    .mobile-direct {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+    }
+
+    .mobile-menu .mobile-direct a {
+      border: 1px solid rgba(10, 25, 47, 0.25);
+      padding: 0.8rem;
       text-align: center;
     }
   }
