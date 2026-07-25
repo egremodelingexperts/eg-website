@@ -1,0 +1,115 @@
+---
+import type { Testimonial } from "../data/testimonials";
+
+interface Props {
+  testimonial: Testimonial;
+  compact?: boolean;
+}
+
+const { testimonial, compact = false } = Astro.props;
+---
+
+<article
+  class:list={[
+    "testimonial-card",
+    testimonial.featured && "featured",
+    testimonial.wide && "wide",
+    compact && "compact",
+  ]}
+>
+  <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+  <blockquote>
+    <p>{testimonial.quote}</p>
+    {testimonial.detail && !compact && <p class="detail">{testimonial.detail}</p>}
+  </blockquote>
+  <footer>
+    <span class="avatar" aria-hidden="true">{testimonial.name.charAt(0)}</span>
+    <div>
+      <strong>{testimonial.name}</strong>
+      <time>{testimonial.date}</time>
+    </div>
+  </footer>
+</article>
+
+<style>
+  .testimonial-card {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    border: 1px solid rgba(10, 25, 47, 0.09);
+    background: white;
+    padding: clamp(1.75rem, 3vw, 2.75rem);
+    box-shadow: 0 24px 70px rgba(10, 25, 47, 0.04);
+  }
+
+  blockquote {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 1.6rem 0 2rem;
+  }
+
+  blockquote p {
+    margin: 0;
+    color: var(--color-slate);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  blockquote .detail {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    font-style: normal;
+  }
+
+  article footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(10, 25, 47, 0.1);
+    padding-top: 1.4rem;
+  }
+
+  .avatar {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    flex: none;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+
+  strong,
+  time {
+    display: block;
+  }
+
+  strong {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  time {
+    margin-top: 0.3rem;
+    color: var(--color-slate);
+    font-size: 0.8rem;
+  }
+
+  .featured blockquote > p:first-child {
+    color: var(--color-navy);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.8vw, 2.35rem);
+    line-height: 1.35;
+  }
+
+  .compact blockquote p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+  }
+</style>

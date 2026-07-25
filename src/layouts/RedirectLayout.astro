@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../config/site";
+
+interface Props {
+  to: string;
+}
+
+const { to } = Astro.props;
+const destination = new URL(to, siteConfig.siteUrl);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${destination.href}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={destination} />
+    <title>Page moved | {siteConfig.name}</title>
+  </head>
+  <body>
+    <main class="redirect-page">
+      <p>This page has moved.</p>
+      <a class="button button-primary" href={to}>Continue to the new page</a>
+    </main>
+  </body>
+</html>
+
+<style>
+  .redirect-page {
+    display: grid;
+    min-height: 100vh;
+    place-content: center;
+    justify-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+  }
+</style>

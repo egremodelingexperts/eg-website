@@ -1,0 +1,554 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import ContactBand from "../components/ContactBand.astro";
+import { testimonials } from "../data/testimonials";
+import heroKitchen from "../assets/images/hero-kitchen.jpg";
+import aboutFireplace from "../assets/images/about-fireplace.png";
+import kitchenService from "../assets/images/kitchen-service.jpg";
+import bathroomService from "../assets/images/bathroom-service.jpg";
+import flooringService from "../assets/images/flooring-service.png";
+import livingMain from "../assets/images/living-main.jpg";
+import livingDetail from "../assets/images/living-detail.jpg";
+import customShelving from "../assets/images/custom-shelving.jpg";
+import tileDetail from "../assets/images/tile-detail.jpg";
+---
+
+<BaseLayout
+  title="EG Remodeling Experts"
+  description="Luxury kitchen, bathroom, flooring and whole-home remodeling in Fort Worth and across DFW."
+  canonicalPath="/"
+>
+  <section class="hero">
+    <Image
+      src={heroKitchen}
+      alt=""
+      class="hero-image"
+      widths={[720, 1280, 1920]}
+      sizes="100vw"
+      format="avif"
+      quality={78}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-shade"></div>
+    <div class="container hero-content">
+      <h1 class="display">
+        Luxury Kitchen &amp;<br />Bathroom Remodeling<br />— Designed for a<br
+          class="desktop-break"
+        /> Seamless Experience
+      </h1>
+      <p>
+        We work with homeowners who want it done right, not done twice. Our clients value quality,
+        thoughtful design, and a team that handles every detail with precision.
+      </p>
+      <em
+        >All images on this website are authentic photos of projects completed by EG Remodeling
+        Experts.</em
+      >
+      <div class="hero-actions">
+        <a class="button button-bronze" href="/consultation/">Request Consultation</a>
+        <a class="button button-outline" href="/portfolio/">View Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-wrap" aria-label="Company highlights">
+    <div class="stats container">
+      <div><strong>250+</strong><span>Happy Clients</span></div>
+      <div><strong>15+</strong><span>Years of Experience</span></div>
+      <div><strong>5★</strong><span>HomeGuide Rating</span></div>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <div class="container about-grid">
+      <div class="about-image-wrap">
+        <Image
+          src={aboutFireplace}
+          alt="Refined living room fireplace and architectural details"
+          widths={[540, 900, 1200]}
+          sizes="(min-width: 900px) 46vw, 100vw"
+          format="avif"
+          quality={78}
+          class="about-image"
+        />
+        <blockquote>
+          “Crafting spaces that reflect your true style.”
+          <cite>— Edy &amp; Team</cite>
+        </blockquote>
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">About Us</span>
+        <h2 class="heading">Crafting Beautiful &amp; Functional Spaces</h2>
+        <p class="body-lg">
+          The journey to your dream home begins with a reliable remodeler. At EG Remodeling Experts,
+          our team is passionate about bringing your vision to life. Situated in Fort Worth, TX, we
+          have served homeowners for many years.
+        </p>
+        <p class="body-lg">
+          Remodeling blends creativity with functionality to make homes more beautiful, comfortable
+          and efficient. You deserve a space that reflects your style, and our professionals are
+          here to help you achieve just that.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services navy-section" id="services">
+    <div class="container">
+      <div class="services-intro">
+        <div>
+          <span class="eyebrow">Our Specialties</span>
+          <h2 class="heading">Comprehensive<br />Remodeling Services</h2>
+        </div>
+        <p>
+          We ensure everything flows together seamlessly, extending select finishes into surrounding
+          areas of your home when desired.
+        </p>
+      </div>
+      <div class="service-grid">
+        <a class="service-card" href="/consultation/">
+          <Image
+            src={kitchenService}
+            alt="Custom kitchen remodeling"
+            widths={[420, 720]}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            format="avif"
+          />
+          <span>Kitchen Remodeling</span>
+        </a>
+        <a class="service-card offset" href="/consultation/">
+          <Image
+            src={bathroomService}
+            alt="Custom bathroom remodeling with tile shower"
+            widths={[420, 720]}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            format="avif"
+          />
+          <span>Bathroom Remodeling</span>
+        </a>
+        <a class="service-card" href="/consultation/">
+          <Image
+            src={flooringService}
+            alt="Custom flooring installation"
+            widths={[420, 720]}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            format="avif"
+          />
+          <span>Flooring Services</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section featured-work">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Project Portfolio</span>
+        <h2 class="heading">Recent Transformations</h2>
+      </div>
+      <div class="work-grid">
+        <Image
+          src={livingMain}
+          alt="Completed living room transformation"
+          widths={[700, 1200]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          format="avif"
+          class="work-main"
+        />
+        <Image
+          src={livingDetail}
+          alt="Living room project detail"
+          widths={[380, 650]}
+          sizes="(min-width: 768px) 25vw, 50vw"
+          format="avif"
+        />
+        <Image
+          src={customShelving}
+          alt="Custom built-in shelving"
+          widths={[380, 650]}
+          sizes="(min-width: 768px) 25vw, 50vw"
+          format="avif"
+        />
+        <Image
+          src={tileDetail}
+          alt="Custom tile installation"
+          widths={[700, 1200]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          format="avif"
+          class="work-wide"
+        />
+      </div>
+      <div class="center-action">
+        <a class="button button-outline" href="/portfolio/">View Full Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-reviews surface">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Testimonials</span>
+        <h2 class="heading">Our Clients’ Experience</h2>
+      </div>
+      <div class="home-review-grid">
+        {
+          testimonials
+            .slice(1, 4)
+            .map((testimonial) => <TestimonialCard testimonial={testimonial} compact />)
+        }
+      </div>
+      <div class="center-action">
+        <a class="button button-primary" href="/reviews/">View All Reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <ContactBand
+    dark={false}
+    title="Request Your Consultation"
+    body="We’d love to learn more about your project. Share your vision with our team and we’ll be in touch to discuss the next steps."
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    min-height: min(780px, calc(100svh - 5.5rem));
+    align-items: center;
+    overflow: hidden;
+    background: var(--color-navy);
+    color: white;
+  }
+
+  .hero-image,
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-image {
+    object-fit: cover;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(4, 14, 29, 0.91) 0%,
+        rgba(4, 14, 29, 0.66) 48%,
+        rgba(4, 14, 29, 0.14) 100%
+      ),
+      linear-gradient(0deg, rgba(4, 14, 29, 0.3), transparent 55%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-block: 5rem;
+  }
+
+  .hero h1 {
+    max-width: 850px;
+  }
+
+  .hero p {
+    max-width: 650px;
+    margin: 2rem 0 1.5rem;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.7;
+  }
+
+  .hero em {
+    display: block;
+    margin-bottom: 2.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.78rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .stats-wrap {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--color-navy);
+    color: white;
+    padding: 3.8rem 2rem;
+  }
+
+  .stats div {
+    display: grid;
+    gap: 0.7rem;
+    text-align: center;
+  }
+
+  .stats div + div {
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .stats strong {
+    color: var(--color-bronze-light);
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .stats span {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .about-image-wrap {
+    position: relative;
+    padding-right: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .about-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .about blockquote {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 20rem;
+    margin: 0;
+    background: var(--color-bronze);
+    color: white;
+    padding: 2rem;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-style: italic;
+    line-height: 1.25;
+  }
+
+  .about cite {
+    display: block;
+    margin-top: 1.25rem;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+  }
+
+  .about-copy .body-lg {
+    margin-block: 1.8rem 0;
+  }
+
+  .services-intro {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .services-intro p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.8;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .service-card {
+    position: relative;
+    display: block;
+    height: 34rem;
+    overflow: hidden;
+    background: var(--color-navy-soft);
+  }
+
+  .service-card.offset {
+    margin-top: 3.5rem;
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.88;
+    transition: transform 500ms ease;
+  }
+
+  .service-card::after {
+    position: absolute;
+    inset: 40% 0 0;
+    background: linear-gradient(transparent, rgba(5, 17, 34, 0.95));
+    content: "";
+  }
+
+  .service-card:hover img {
+    transform: scale(1.04);
+  }
+
+  .service-card span {
+    position: absolute;
+    z-index: 1;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 2.5vw, 2.25rem);
+  }
+
+  .section-title {
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  .work-grid {
+    display: grid;
+    height: 720px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1.25fr;
+    gap: 1rem;
+  }
+
+  .work-grid :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .work-grid :global(.work-main) {
+    grid-row: 1 / 3;
+  }
+
+  .work-grid :global(.work-wide) {
+    grid-column: 2 / 4;
+  }
+
+  .center-action {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .home-review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image-wrap {
+      max-width: 42rem;
+    }
+
+    .services-intro {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      height: 28rem;
+    }
+
+    .work-grid {
+      height: 560px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      min-height: calc(100svh - 4.75rem);
+    }
+
+    .hero-shade {
+      background: linear-gradient(90deg, rgba(4, 14, 29, 0.9), rgba(4, 14, 29, 0.5));
+    }
+
+    .desktop-break {
+      display: none;
+    }
+
+    .stats {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-block: 2.5rem;
+    }
+
+    .stats div + div {
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 0;
+      padding-top: 2rem;
+    }
+
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card.offset {
+      margin-top: 0;
+    }
+
+    .work-grid {
+      height: auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 25rem 13rem 18rem;
+    }
+
+    .work-grid :global(.work-main) {
+      grid-column: 1 / 3;
+      grid-row: auto;
+    }
+
+    .work-grid :global(.work-wide) {
+      grid-column: 1 / 3;
+    }
+
+    .home-review-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .about-image-wrap {
+      padding-right: 0;
+    }
+
+    .about blockquote {
+      position: relative;
+      margin-top: -2rem;
+      margin-left: 2rem;
+    }
+  }
+</style>

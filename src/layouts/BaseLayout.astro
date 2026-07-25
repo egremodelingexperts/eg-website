@@ -1,0 +1,79 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../config/site";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  image?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  image = "/og.jpg",
+  noIndex = false,
+} = Astro.props;
+const canonical = new URL(canonicalPath, siteConfig.siteUrl);
+const socialImage = new URL(image, siteConfig.siteUrl);
+const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+const year = new Date().getFullYear();
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  telephone: siteConfig.phoneDisplay,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Fort Worth",
+    addressRegion: "TX",
+    postalCode: "76116",
+    addressCountry: "US",
+  },
+  areaServed: {
+    "@type": "Place",
+    name: "Dallas–Fort Worth, Texas",
+  },
+  sameAs: [siteConfig.instagram],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a192f" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer year={year} />
+  </body>
+</html>

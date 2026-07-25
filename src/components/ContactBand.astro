@@ -1,0 +1,81 @@
+---
+import { siteConfig } from "../config/site";
+
+interface Props {
+  title?: string;
+  body?: string;
+  dark?: boolean;
+}
+
+const {
+  title = "Ready to Start Your Project?",
+  body = "Tell us about your space and the transformation you have in mind. Our team is ready to discuss the possibilities.",
+  dark = true,
+} = Astro.props;
+---
+
+<section class:list={["contact-band", dark && "dark"]}>
+  <div class="container">
+    <span class="eyebrow">Get Started</span>
+    <h2 class="heading">{title}</h2>
+    <p>{body}</p>
+    <div class="actions">
+      <a class:list={["button", dark ? "button-bronze" : "button-primary"]} href="/consultation/">
+        Request a Consultation
+      </a>
+      <a class="direct-link" href={siteConfig.phoneHref}>
+        Or call {siteConfig.phoneDisplay}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-band {
+    padding-block: clamp(5rem, 9vw, 8rem);
+    background: var(--color-paper);
+    text-align: center;
+  }
+
+  .contact-band.dark {
+    background: var(--color-navy);
+    color: white;
+  }
+
+  h2 {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  p {
+    max-width: 50rem;
+    margin: 1.5rem auto 2.25rem;
+    color: var(--color-slate);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .dark p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .direct-link {
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.2rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 560px) {
+    .actions {
+      flex-direction: column;
+    }
+  }
+</style>

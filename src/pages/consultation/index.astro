@@ -1,0 +1,314 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../config/site";
+import consultationHero from "../../assets/images/consultation-hero.png";
+
+const hasForm = Boolean(
+  siteConfig.consultationForm.embedUrl && siteConfig.consultationForm.publicUrl,
+);
+---
+
+<BaseLayout
+  title="Request a Consultation"
+  description="Tell EG Remodeling Experts about your kitchen, bathroom, flooring or whole-home remodeling project."
+  canonicalPath="/consultation/"
+>
+  <section class="consultation-hero">
+    <Image
+      src={consultationHero}
+      alt=""
+      class="consultation-image"
+      widths={[720, 1280, 1920]}
+      sizes="100vw"
+      format="avif"
+      quality={78}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="consultation-shade"></div>
+    <div class="container hero-copy">
+      <h1 class="display">Envision Your New Space</h1>
+      <p>
+        A consultation is the vital first step in our “concept to completion” journey. Share your
+        vision, and let our experts guide you through the possibilities for your home remodeling
+        project.
+      </p>
+    </div>
+  </section>
+
+  <section class="section consultation-content">
+    <div class="container consultation-grid">
+      <aside>
+        <span class="eyebrow">Concept to Completion</span>
+        <h2 class="subheading">A thoughtful start for a seamless project</h2>
+        <p>
+          Our team manages every detail from sketch to polish. Tell us about your goals, location,
+          service needs and ideal timeline so we can start the conversation prepared.
+        </p>
+
+        <div class="direct-contact">
+          <div>
+            <span>Phone</span>
+            <a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a>
+          </div>
+          <div>
+            <span>Email</span>
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </div>
+          <div>
+            <span>Location</span>
+            <p>{siteConfig.location}</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="form-shell">
+        {
+          hasForm ? (
+            <>
+              <div class="form-loading" data-form-loading role="status">
+                <span class="loading-mark" aria-hidden="true" />
+                <span>Loading consultation form…</span>
+              </div>
+              <iframe
+                src={siteConfig.consultationForm.embedUrl}
+                title="EG Remodeling Experts consultation request form"
+                loading="eager"
+                referrerpolicy="strict-origin-when-cross-origin"
+                data-consultation-form
+              />
+              <div class="form-fallback">
+                <span>Having trouble with the embedded form?</span>
+                <a href={siteConfig.consultationForm.publicUrl} target="_blank" rel="noreferrer">
+                  Open form in a new tab <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </>
+          ) : (
+            <div class="form-pending" data-form-placeholder>
+              <span class="eyebrow">Consultation Requests</span>
+              <h2 class="heading">The online form is being prepared.</h2>
+              <p>
+                In the meantime, call or email us directly and our team will be happy to learn about
+                your project.
+              </p>
+              <div class="pending-actions">
+                <a class="button button-primary" href={siteConfig.phoneHref}>
+                  Call {siteConfig.phoneDisplay}
+                </a>
+                <a class="button button-outline" href={`mailto:${siteConfig.email}`}>
+                  Send an Email
+                </a>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLIFrameElement>("[data-consultation-form]");
+  const loading = document.querySelector<HTMLElement>("[data-form-loading]");
+  form?.addEventListener("load", () => {
+    if (loading) loading.hidden = true;
+  });
+</script>
+
+<style>
+  .consultation-hero {
+    position: relative;
+    display: grid;
+    min-height: 33rem;
+    align-items: center;
+    overflow: hidden;
+    background: var(--color-navy);
+    color: white;
+  }
+
+  .consultation-image,
+  .consultation-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .consultation-image {
+    object-fit: cover;
+  }
+
+  .consultation-shade {
+    background: linear-gradient(90deg, rgba(6, 17, 31, 0.76), rgba(6, 17, 31, 0.35));
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-copy p {
+    max-width: 50rem;
+    margin: 1.75rem 0 0;
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.75;
+  }
+
+  .consultation-grid {
+    display: grid;
+    grid-template-columns: minmax(17rem, 0.4fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  aside {
+    position: sticky;
+    top: 8rem;
+  }
+
+  aside > p {
+    margin: 1.5rem 0 2.5rem;
+    color: var(--color-slate);
+    line-height: 1.8;
+  }
+
+  .direct-contact {
+    display: grid;
+    gap: 1.5rem;
+    border-top: 1px solid rgba(10, 25, 47, 0.14);
+    padding-top: 2rem;
+  }
+
+  .direct-contact div {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .direct-contact span {
+    color: var(--color-bronze);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .direct-contact a,
+  .direct-contact p {
+    margin: 0;
+    color: var(--color-slate);
+    line-height: 1.5;
+  }
+
+  .direct-contact a:hover {
+    color: var(--color-bronze);
+  }
+
+  .form-shell {
+    position: relative;
+    min-height: 38rem;
+    border: 1px solid rgba(10, 25, 47, 0.1);
+    background: white;
+    box-shadow: 0 30px 70px rgba(10, 25, 47, 0.06);
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    min-height: 62rem;
+    border: 0;
+  }
+
+  .form-loading {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 1rem;
+    background: white;
+    color: var(--color-slate);
+  }
+
+  .form-loading[hidden] {
+    display: none;
+  }
+
+  .loading-mark {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 3px solid var(--color-line);
+    border-top-color: var(--color-bronze);
+    border-radius: 50%;
+    animation: spin 700ms linear infinite;
+  }
+
+  .form-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgba(10, 25, 47, 0.1);
+    padding: 1rem 1.5rem;
+    color: var(--color-slate);
+    font-size: 0.82rem;
+  }
+
+  .form-fallback a {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .form-pending {
+    display: grid;
+    min-height: 38rem;
+    align-content: center;
+    padding: clamp(2rem, 6vw, 5rem);
+  }
+
+  .form-pending p {
+    max-width: 39rem;
+    margin: 1.5rem 0 2rem;
+    color: var(--color-slate);
+    line-height: 1.8;
+  }
+
+  .pending-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 840px) {
+    .consultation-grid {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      position: static;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .consultation-hero {
+      min-height: 29rem;
+    }
+
+    .form-pending {
+      min-height: 32rem;
+    }
+
+    .pending-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

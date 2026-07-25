@@ -1,0 +1,228 @@
+---
+import { Image } from "astro:assets";
+import type { Gallery } from "../data/galleries";
+
+interface Props {
+  gallery: Gallery;
+  dark?: boolean;
+}
+
+const { gallery, dark = false } = Astro.props;
+---
+
+<section class:list={["gallery-section", dark && "dark"]} id={gallery.id}>
+  <div class="container">
+    <div class="gallery-heading">
+      <div>
+        <span class="eyebrow">{gallery.id === "kitchens" ? "01" : "02"}</span>
+        <h2 class="heading">{gallery.title}</h2>
+      </div>
+      <p>{gallery.description}</p>
+    </div>
+
+    <div
+      class="carousel"
+      data-carousel
+      tabindex="0"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={`${gallery.title} project gallery`}
+    >
+      <div class="slides" aria-live="polite">
+        {
+          gallery.images.map((image, index) => (
+            <div
+              class="slide"
+              data-slide
+              hidden={index !== 0}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${gallery.images.length}`}
+            >
+              <button
+                class="image-button"
+                type="button"
+                data-lightbox-trigger
+                data-lightbox-alt={image.alt}
+                aria-label={`View larger image: ${image.alt}`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  widths={[720, 1200, 1800]}
+                  sizes="(min-width: 1320px) 1280px, 100vw"
+                  format="avif"
+                  quality={80}
+                />
+              </button>
+            </div>
+          ))
+        }
+      </div>
+
+      <button
+        class="carousel-arrow previous"
+        type="button"
+        data-previous
+        aria-label="Previous image"
+      >
+        <span aria-hidden="true">←</span>
+      </button>
+      <button class="carousel-arrow next" type="button" data-next aria-label="Next image">
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <div class="dots" aria-label="Choose image">
+        {
+          gallery.images.map((_, index) => (
+            <button
+              type="button"
+              data-dot
+              aria-label={`Show image ${index + 1}`}
+              aria-current={index === 0 ? "true" : "false"}
+            />
+          ))
+        }
+      </div>
+      <p class="sr-only" data-status>Image 1 of {gallery.images.length}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    padding-block: clamp(5rem, 9vw, 8rem);
+    background: var(--color-warm-white);
+  }
+
+  .gallery-section.dark {
+    background: var(--color-navy);
+    color: white;
+  }
+
+  .gallery-heading {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(10, 25, 47, 0.15);
+    padding-bottom: 1.5rem;
+  }
+
+  .dark .gallery-heading {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .gallery-heading p {
+    margin: 0;
+    color: var(--color-slate);
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  .dark .gallery-heading p {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    background: #e9e7e7;
+    box-shadow: 0 24px 70px rgba(10, 25, 47, 0.07);
+  }
+
+  .slides,
+  .slide,
+  .image-button,
+  .image-button :global(img) {
+    width: 100%;
+    height: clamp(28rem, 55vw, 42rem);
+  }
+
+  .slide[hidden] {
+    display: none;
+  }
+
+  .image-button {
+    display: block;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: zoom-in;
+  }
+
+  .image-button :global(img) {
+    object-fit: cover;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+    background: rgba(10, 25, 47, 0.62);
+    color: white;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 160ms ease;
+  }
+
+  .carousel-arrow:hover {
+    background: var(--color-bronze);
+  }
+
+  .previous {
+    left: 1.25rem;
+  }
+
+  .next {
+    right: 1.25rem;
+  }
+
+  .dots {
+    position: absolute;
+    z-index: 2;
+    bottom: 1.5rem;
+    left: 50%;
+    display: flex;
+    gap: 0.6rem;
+    transform: translateX(-50%);
+  }
+
+  .dots button {
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 1px solid white;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+  }
+
+  .dots button[aria-current="true"] {
+    background: white;
+  }
+
+  @media (max-width: 700px) {
+    .gallery-heading {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .gallery-heading p {
+      text-align: left;
+    }
+
+    .slides,
+    .slide,
+    .image-button,
+    .image-button :global(img) {
+      height: 29rem;
+    }
+  }
+</style>

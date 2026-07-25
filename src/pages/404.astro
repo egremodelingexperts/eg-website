@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The requested page could not be found."
+  canonicalPath="/404.html"
+  noIndex
+>
+  <section class="not-found">
+    <div class="container">
+      <span class="eyebrow">404</span>
+      <h1 class="display">This space needs a new plan.</h1>
+      <p>
+        The page you were looking for has moved or no longer exists. Explore our work or return
+        home.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="/">Return Home</a>
+        <a class="button button-outline" href="/portfolio/">View Portfolio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 65vh;
+    place-items: center;
+    padding-block: 6rem;
+    text-align: center;
+  }
+
+  h1,
+  p {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  p {
+    margin-top: 1.5rem;
+    color: var(--color-slate);
+    line-height: 1.8;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 520px) {
+    .actions {
+      flex-direction: column;
+    }
+  }
+</style>

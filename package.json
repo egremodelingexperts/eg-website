@@ -1,0 +1,33 @@
+{
+  "name": "eg-remodeling-experts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && npm run validate:build",
+    "build:production": "npm run validate:production && astro check && astro build && npm run validate:build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "validate:production": "node scripts/validate-production.mjs",
+    "validate:build": "node scripts/validate-build.mjs",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "@fontsource/eb-garamond": "latest",
+    "@fontsource/manrope": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@axe-core/playwright": "latest",
+    "@playwright/test": "latest",
+    "@types/node": "latest",
+    "prettier": "latest",
+    "prettier-plugin-astro": "latest",
+    "typescript": "latest"
+  }
+}

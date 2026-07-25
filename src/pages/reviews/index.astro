@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TestimonialCard from "../../components/TestimonialCard.astro";
+import ContactBand from "../../components/ContactBand.astro";
+import { testimonials } from "../../data/testimonials";
+---
+
+<BaseLayout
+  title="Reviews"
+  description="Read what Fort Worth and DFW homeowners say about working with EG Remodeling Experts."
+  canonicalPath="/reviews/"
+>
+  <section class="reviews-hero">
+    <div class="container">
+      <span class="eyebrow">Testimonials</span>
+      <h1 class="display">Our Clients’ Experience</h1>
+      <p>
+        Trusted by homeowners across DFW. See what our clients have to say about working with EG
+        Remodeling Experts—from custom kitchens and luxury bathroom renovations to whole-home
+        transformations.
+      </p>
+      <div class="hero-stars" aria-label="5 out of 5 stars">★★★★★</div>
+    </div>
+  </section>
+
+  <section class="reviews-content">
+    <div class="container reviews-grid">
+      {
+        testimonials.map((testimonial, index) => (
+          <div
+            class:list={[
+              "review-wrap",
+              index === 0 && "feature-wrap",
+              testimonial.wide && "wide-wrap",
+            ]}
+          >
+            <TestimonialCard testimonial={testimonial} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <ContactBand />
+</BaseLayout>
+
+<style>
+  .reviews-hero {
+    padding-block: clamp(7rem, 13vw, 11rem) clamp(5rem, 8vw, 7rem);
+    text-align: center;
+  }
+
+  .reviews-hero h1 {
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+
+  .reviews-hero p {
+    max-width: 63rem;
+    margin: 2rem auto 0;
+    color: var(--color-slate);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.8;
+  }
+
+  .hero-stars {
+    margin-top: 2.5rem;
+    color: var(--color-bronze);
+    font-size: 1.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  .reviews-content {
+    padding-bottom: clamp(6rem, 10vw, 10rem);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .review-wrap {
+    min-width: 0;
+  }
+
+  .feature-wrap {
+    grid-column: span 2;
+  }
+
+  .wide-wrap {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 920px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wide-wrap {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 660px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-wrap,
+    .wide-wrap {
+      grid-column: auto;
+    }
+  }
+</style>

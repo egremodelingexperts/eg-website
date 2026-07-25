@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../config/site";
+
+// PRIVACY_COPY_PENDING: replace this preview content with company-approved legal text.
+const privacyIsPlaceholder = true;
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy information for visitors to the EG Remodeling Experts website."
+  canonicalPath="/privacy/"
+  noIndex={privacyIsPlaceholder}
+>
+  <section class="legal-hero">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1 class="display">Privacy Policy</h1>
+      <p>How information submitted through this website will be handled.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="legal-copy container" data-launch-placeholder>
+      <div class="notice" role="note">
+        Preview only: this page must be replaced with company-approved privacy policy text before
+        production deployment.
+      </div>
+
+      <h2>Information you provide</h2>
+      <p>
+        Visitors may choose to contact {siteConfig.name} by phone, email, or through the consultation
+        form. The final policy will describe the information collected through those channels and how
+        it is used.
+      </p>
+
+      <h2>Google Forms</h2>
+      <p>
+        The consultation form will be provided through Google Forms. The approved policy must
+        explain that form submissions are processed using company-owned Google services and link to
+        applicable Google privacy information.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about privacy can be directed to <a href={`mailto:${siteConfig.email}`}
+          >{siteConfig.email}</a
+        > or <a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a>.
+      </p>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    padding-block: clamp(6rem, 10vw, 9rem);
+    background: var(--color-navy);
+    color: white;
+  }
+
+  .legal-hero p {
+    margin: 1.5rem 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+  }
+
+  .legal-copy {
+    max-width: 52rem;
+  }
+
+  .notice {
+    margin-bottom: 3rem;
+    border-left: 4px solid var(--color-bronze);
+    background: #fff5e9;
+    padding: 1.25rem 1.5rem;
+    color: #664725;
+    line-height: 1.6;
+  }
+
+  h2 {
+    margin: 2.5rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--color-slate);
+    line-height: 1.8;
+  }
+
+  p a {
+    border-bottom: 1px solid var(--color-bronze);
+    color: var(--color-navy);
+  }
+</style>
