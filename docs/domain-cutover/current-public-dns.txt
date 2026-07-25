@@ -1,0 +1,47 @@
+EG Remodeling Experts — public DNS snapshot
+Captured: 2026-07-24 America/Chicago
+Domain: egremodelingexperts.com
+
+This file records public DNS responses. It does not enumerate private Wix
+account settings or records on undiscovered subdomains.
+
+SOA
+egremodelingexperts.com. 3600 IN SOA ns12.wixdns.net. support.wix.com. 2025051920 10800 3600 1209600 3600
+
+NS
+egremodelingexperts.com. 86290 IN NS ns12.wixdns.net.
+egremodelingexperts.com. 86290 IN NS ns13.wixdns.net.
+
+APEX A
+egremodelingexperts.com. 1316 IN A 185.230.63.186
+egremodelingexperts.com. 1316 IN A 185.230.63.107
+egremodelingexperts.com. 1316 IN A 185.230.63.171
+
+APEX AAAA
+(no answer)
+
+APEX CNAME
+(no answer)
+
+APEX MX
+(no answer)
+
+APEX TXT
+(no answer)
+
+APEX CAA
+(no answer)
+
+APEX SRV
+(no answer)
+
+WWW CNAME
+www.egremodelingexperts.com. 3490 IN CNAME cdn1.wixdns.net.
+
+EN CNAME REPORTED BY WIX DASHBOARD
+en.egremodelingexperts.com. 3600 IN CNAME cdn1.wixdns.net.
+
+WWW RESOLUTION CHAIN AT CAPTURE TIME
+www.egremodelingexperts.com. 3490 IN CNAME cdn1.wixdns.net.
+cdn1.wixdns.net. 9 IN CNAME td-ccm-neg-87-45.wixdns.net.
+td-ccm-neg-87-45.wixdns.net. 83920 IN A 34.149.87.45

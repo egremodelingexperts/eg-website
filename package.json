@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && npm run validate:build",
+    "build": "npm run check:public && astro check && astro build && npm run validate:build",
     "build:production": "npm run validate:production && astro check && astro build && npm run validate:build",
     "preview": "astro preview",
     "check": "astro check",
+    "check:public": "node scripts/check-public-repo.mjs",
     "validate:production": "node scripts/validate-production.mjs",
     "validate:build": "node scripts/validate-build.mjs",
     "test": "playwright test"
