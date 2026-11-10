@@ -14,10 +14,10 @@ import texasIcon from "../assets/icons/texas.png";
 const kitchenService = kitchenGallery.images[0]!;
 const bathroomService = bathroomGallery.images[0]!;
 const flooringService = surfacesGallery.images[0]!;
-const livingMain = surfacesGallery.images[1] ?? surfacesGallery.images[0]!;
-const livingDetail = bathroomGallery.images[1] ?? bathroomGallery.images[0]!;
-const customShelving = bathroomGallery.images[6] ?? bathroomGallery.images[0]!;
-const tileDetail = kitchenGallery.images[0]!;
+const livingMain = surfacesGallery.images.find((image) => image.caption.startsWith("Interior refresh featuring freshly painted walls and trim for a bright")) ?? surfacesGallery.images[0]!;
+const livingDetail = surfacesGallery.images.find((image) => image.caption.startsWith("New patio flooring installed")) ?? surfacesGallery.images[0]!;
+const customShelving = kitchenGallery.images[3] ?? kitchenGallery.images[0]!;
+const tileDetail = bathroomGallery.images[0]!;
 ---
 
 <BaseLayout
@@ -40,13 +40,11 @@ const tileDetail = kitchenGallery.images[0]!;
     <div class="hero-shade"></div>
     <div class="container hero-content">
       <h1 class="display">
-        Luxury Kitchen &amp;<br />Bathroom Remodeling<br />— Designed for a<br
-          class="desktop-break"
-        /> Seamless Experience
+        Kitchen, Bathroom &amp; Whole-Home Remodeling — Beautiful Spaces, Built to Last
       </h1>
       <p>
-        We work with homeowners who want it done right, not done twice. Our clients value quality,
-        thoughtful design, and a team that handles every detail with precision.
+        Clear communication, careful craftsmanship, and a cleaner worksite are at the heart of every
+        project. Feel confident in your team as we transform your home.
       </p>
       <em
         >All images on this website are authentic photos of projects completed by EG Remodeling
@@ -302,6 +300,11 @@ const tileDetail = kitchenGallery.images[0]!;
     position: relative;
     z-index: 1;
     padding-block: 5rem;
+  }
+
+  .hero h1 {
+    max-width: 20ch;
+    text-wrap: balance;
   }
 
   .hero h1 {

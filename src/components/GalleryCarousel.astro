@@ -41,7 +41,15 @@ const { gallery, dark = false } = Astro.props;
               aria-label={`${index + 1} of ${gallery.images.length}`}
             >
               <button
-                class="image-button"
+                class:list={[
+                  "image-button",
+                  image.caption ===
+                    "New laminate flooring installed throughout the home for a cohesive, updated look" &&
+                    "flooring-photo",
+                  image.caption ===
+                    "Kitchen refresh featuring freshly painted walls and refinished cabinetry for a polished, updated look" &&
+                    "cabinet-photo",
+                ]}
                 type="button"
                 data-lightbox-trigger
                 data-lightbox-alt={image.alt}
@@ -158,6 +166,14 @@ const { gallery, dark = false } = Astro.props;
 
   .image-button :global(img) {
     object-fit: cover;
+  }
+
+  .flooring-photo :global(img) {
+    object-position: center 85%;
+  }
+
+  .cabinet-photo :global(img) {
+    object-position: center 35%;
   }
 
   .image-caption {
