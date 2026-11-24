@@ -8,6 +8,14 @@ const measurementId = "G-QMMK4NPT6J";
 const clarityId = "zf68ijcacm";
 
 test.beforeEach(async ({ page, request }) => {
+  // The mirrored production page should not include Astro's development overlay.
+  await page.addInitScript(() => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const style = document.createElement("style");
+      style.textContent = "astro-dev-toolbar { display: none !important; }";
+      document.head.append(style);
+    });
+  });
   // Serve this checkout at its production origin to exercise the hostname guard.
   await page.route(`${productionOrigin}/**`, async (route) => {
     const url = new URL(route.request().url());
@@ -21,6 +29,10 @@ test.beforeEach(async ({ page, request }) => {
   await page.route(/https:\/\/(www\.googletagmanager\.com|www\.clarity\.ms)\//, (route) =>
     route.fulfill({ contentType: "application/javascript", body: "" }),
   );
+});
+
+test.afterEach(async ({ page }) => {
+  await page.unrouteAll({ behavior: "ignoreErrors" });
 });
 
 test("analytics starts only after consent, remembers decline, and can be withdrawn", async ({
