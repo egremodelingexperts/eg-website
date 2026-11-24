@@ -1,0 +1,89 @@
+---
+import { analyticsConfig, siteConfig } from "../config/site";
+import { withBase } from "../utils/paths";
+
+interface Props {
+  pagePath: string;
+}
+
+const { pagePath } = Astro.props;
+---
+
+<section
+  class="analytics-consent"
+  aria-labelledby="analytics-heading"
+  data-analytics-consent
+  data-origin={siteConfig.siteUrl}
+  data-base={import.meta.env.BASE_URL}
+  data-measurement-id={analyticsConfig.measurementId}
+  data-clarity-id={analyticsConfig.clarityProjectId}
+  data-page-path={pagePath}
+  hidden
+>
+  <h2 id="analytics-heading" tabindex="-1">Website analytics</h2>
+  <p>
+    We use optional analytics to understand how people use our site.
+    {analyticsConfig.clarityProjectId && "This includes masked recordings of clicks and scrolling."}
+    {" "}
+    <a href={withBase("/privacy/")}>Privacy policy</a>
+  </p>
+  <div class="analytics-actions">
+    <button type="button" data-analytics-choice="declined">Decline</button>
+    <button type="button" data-analytics-choice="accepted">Allow analytics</button>
+  </div>
+</section>
+
+<script>
+  import "../scripts/analytics";
+</script>
+
+<style>
+  .analytics-consent {
+    position: fixed;
+    z-index: 50;
+    inset: auto 1rem 1rem auto;
+    width: min(26rem, calc(100% - 2rem));
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: white;
+    color: var(--color-navy);
+    box-shadow: 0 0.25rem 1.25rem rgb(10 25 47 / 18%);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0.4rem 0 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .analytics-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  button {
+    min-height: 2.75rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--color-navy);
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: var(--color-navy);
+    color: white;
+  }
+</style>

@@ -4,8 +4,25 @@ The public website for **EG Remodeling Experts**, a remodeling company serving
 Fort Worth, DFW, and surrounding areas.
 
 The site is a static Astro website hosted with GitHub Pages. It contains no
-backend, CMS, analytics, or general contact-form database. Consultation
+backend, CMS, or general contact-form database. Consultation
 requests are collected through the company-owned Google Form.
+
+## Website analytics
+
+GA4 and Microsoft Clarity measure opted-in visits on the custom domain. The public
+project IDs are configured in `src/config/site.ts`. Before release, verify strict
+masking and required cookie consent in the Clarity project. Clarity excludes the
+consultation page and URLs with queries or fragments.
+
+Before release, disable GA4 Enhanced Measurement and enable email redaction in the
+web stream. Keep Google Signals and ad personalization disabled. This site sends
+one page view per load and explicit events: `click_phone`, `click_email`,
+`consultation_start` on consultation page arrival, and `view_portfolio` on portfolio
+arrival. Confirmed submissions come from Google Forms responses.
+
+On production, verify no tags load before consent. Opt in and check GA4 Realtime
+and Clarity Recordings, then decline through Analytics settings and confirm tags
+stay unloaded on reload.
 
 ## Website pages
 

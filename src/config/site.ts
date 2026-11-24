@@ -41,3 +41,8 @@ export const siteConfig: SiteConfig = {
       "https://docs.google.com/forms/d/e/1FAIpQLSeIOdQ7yBXXF4cjz1Uho1y_eYURkfL9d4JOyzwnyCp24Cl_rA/viewform?usp=send_form",
   },
 };
+
+export const analyticsConfig = {
+  measurementId: "G-QMMK4NPT6J",
+  clarityProjectId: "zf68ijcacm",
+};
