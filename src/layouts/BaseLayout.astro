@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import AnalyticsConsent from "../components/AnalyticsConsent.astro";
 import Footer from "../components/Footer.astro";
 import { siteConfig } from "../config/site";
 import { withBase } from "../utils/paths";
@@ -77,5 +78,6 @@ const localBusiness = {
       <slot />
     </main>
     <Footer year={year} />
+    <AnalyticsConsent pagePath={canonical.pathname} />
   </body>
 </html>

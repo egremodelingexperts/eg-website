@@ -30,6 +30,7 @@ const { year } = Astro.props;
         <li><a href={withBase("/reviews/")}>Reviews</a></li>
         <li><a href={withBase("/consultation/")}>Consultation</a></li>
         <li><a href={withBase("/privacy/")}>Privacy Policy</a></li>
+        <li data-analytics-settings hidden><button type="button">Analytics settings</button></li>
       </ul>
     </div>
 
@@ -117,6 +118,13 @@ const { year } = Astro.props;
 
   .site-footer a:hover {
     color: var(--color-bronze-light);
+  }
+
+  [data-analytics-settings] button {
+    font: inherit;
+    text-align: left;
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .social-link {
