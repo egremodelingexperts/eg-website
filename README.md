@@ -24,6 +24,22 @@ On production, verify no tags load before consent. Opt in and check GA4 Realtime
 and Clarity Recordings, then decline through Analytics settings and confirm tags
 stay unloaded on reload.
 
+## Google Search Console
+
+Use the URL-prefix property `https://egremodelingexperts.com/` with the business
+Google account `egpaintingandmore@gmail.com`. The shared page layout contains its
+Google ownership verification tag. Keep this tag after verification succeeds;
+Google periodically checks that it remains present. This tag does not load
+analytics or change visitors' consent choices.
+
+The sitemap includes current content pages and excludes the legacy Wix redirect
+pages, which remain reachable and carry `noindex` instructions.
+
+After publishing the tag, complete HTML tag verification in Search Console and
+submit `https://egremodelingexperts.com/sitemap-index.xml`. Review Page indexing
+and inspect the live homepage and portfolio URLs. New reporting data may take
+time to appear. The separate Domain property still requires DNS verification.
+
 ## Website pages
 
 | Page           | Address          |
