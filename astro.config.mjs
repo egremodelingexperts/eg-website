@@ -9,7 +9,15 @@ export default defineConfig({
   base: deploymentBase,
   output: "static",
   trailingSlash: "always",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Keep legacy Wix redirects reachable without advertising them for indexing.
+      filter: (page) =>
+        !/\/(?:about-us|blank|blank-3|blank-6|blog|contact-us|testamonials|testimonials)\/$/.test(
+          new URL(page).pathname,
+        ),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
